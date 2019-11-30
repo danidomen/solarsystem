@@ -1,0 +1,53 @@
+body {
+    background: black;
+    user-select: none;
+    font: 10pt monospace;
+}
+
+canvas {
+    cursor: pointer;
+    outline: 1px solid white;
+    outline-offset: 1px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    color: white;
+    font: 10pt monospace;
+    text-align: right;
+    padding: 10pt;
+    margin: 5pt;
+    border: 1px solid white;
+    cursor: default;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+p span {
+    color: #FF0;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.planet-info-card {
+    background-color: grey;
+    height: 160px;
+    width: 200px;
+    border-radius: 20px;
+    -webkit-box-shadow: 10px 6px 15px -6px rgba(37, 144, 176, 1);
+    -moz-box-shadow: 10px 6px 15px -6px rgba(37, 144, 176, 1);
+    box-shadow: 10px 6px 15px -6px rgba(37, 144, 176, 1);
+    z-index: 1;
+    left: 400px;
+    position: absolute;
+    text-align: center;
+}
+
+#planet-type {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 100%;
+}
