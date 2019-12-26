@@ -6,18 +6,50 @@
 </head>
 
 <body>
+    <script type="x-shader/x-vertex" id="vertexshader">
+        uniform float time;
+        attribute vec3 customColor;
+        varying vec3 vColor;
+        void main() 
+        {
+            vColor = customColor; // set color associated to vertex; use later in fragment shader.
+        
+            vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        
+            // option (1): draw particles at constant size on screen
+            // gl_PointSize = size;
+            // option (2): scale particles as objects in 3D space
+            gl_PointSize = 40.0 * ( 300.0 / length( mvPosition.xyz ) );
+            gl_Position = projectionMatrix * mvPosition;
+        }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentshader">
+        uniform sampler2D texture;
+        varying vec3 vColor; // colors associated to vertices, assigned by vertex shader
+        void main() 
+        {
+            // calculates a color for the particle
+            gl_FragColor = vec4( vColor, 1.0 );
+            // sets a white particle texture to desired color
+            gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+        }
+    </script>
     <div class="planet-info-card">
     </div>
     <footer>
-        <p>Click izquierdo / Tocar para <span>Orbitar</span></p>
+        <span id="quantaPopulation">0</span> QUANTAS
+        <input type="button" id="addQuanta" value="Add Quanta"/> <input type="text" id="quantaNumber" placeholder="Quanta number"/>
+        <input type="button" id="eraseQuanta" value="Erase Quanta" />
+        <!--<p>Click izquierdo / Tocar para <span>Orbitar</span></p>
         <p>Click central / Scroll / Pellizcar para hacer <span>Zoom</span></p>
         <p>Click derecho / Arrastrar con 3 dedos para <span>Panear</span></p>
-        <p>Refrescando obtienes un sistema solar aleatorio</p>
+        <p>Refrescando obtienes un sistema solar aleatorio</p>-->
     </footer>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
     <script type="text/javascript" src="/js/three.interaction.js"></script>
     <script type="text/javascript" src="/js/THREEOrbit.js"></script>
+    <script type="text/javascript" src="/js/THREEOBJLoader.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r14/Stats.min.js"></script>
     <script type="text/javascript" src="/js/generator.js"></script>
 </body>
