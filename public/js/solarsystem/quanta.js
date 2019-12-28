@@ -1,6 +1,9 @@
 var quantas = [];
 var followedQuanta = null;
 
+
+
+
 function quantaTravel() {
     quantas.forEach(quanta => {
 
@@ -25,10 +28,36 @@ function quantaTravel() {
     });
 }
 
+var trails = [];
+var materialQuanta = new THREE.MeshNormalMaterial();
+
+var lineVertexShader = `
+  	varying vec3 vPos;
+    void main() 
+    {
+      vPos = position;
+      vec4 modelViewPosition = modelViewMatrix * vec4(position, 2.0);
+      gl_Position = projectionMatrix * modelViewPosition;
+    }
+  `;
+
+  var lineFragmentShader = `
+    uniform vec3 origin;
+    uniform vec3 color;
+    uniform float limitDistance;
+  	varying vec3 vPos;
+
+    void main() {
+    	float distance = clamp(length(vPos - origin), 0., limitDistance);
+      float opacity = 1. - distance / limitDistance;
+      gl_FragColor = vec4(color, opacity);
+    }
+
+  `;
+
 function addQuanta() {
     var quanta = new THREE.Group();
     var quanta3D = new THREE.LOD();
-    var material = new THREE.MeshNormalMaterial();
 
     for (var i = 0; i < 5; i++) {
         var radius = 4;
@@ -70,17 +99,49 @@ function addQuanta() {
 
         var geometry = new THREE.CylinderGeometry(0, radius, height, faces, 1)
 
-        var mesh = new THREE.Mesh(geometry, material);
+        var mesh = new THREE.Mesh(geometry, materialQuanta);
 
         if (i == 0) {
 
             mesh = shipMeshes[Math.floor(Math.random() * shipMeshes.length)].clone();
             mesh.rotation.set(Math.PI / 2, 0, Math.PI)
         }
-        quanta3D.addLevel(mesh, distance);
 
+        
+        
+        quanta3D.addLevel(mesh, distance);
     }
+    var lineGeom = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,-50,0), new THREE.Vector3(0,0,0)]);
+    var rayLine = new THREE.Line(lineGeom, new THREE.ShaderMaterial({
+        uniforms: {
+            color: {
+            value: new THREE.Color(0x00ff00)
+            },
+            origin: {
+            value: new THREE.Vector3()
+            },
+            limitDistance:{
+            value: 50.0
+            }
+        },
+        vertexShader: lineVertexShader,
+        fragmentShader: lineFragmentShader,
+        transparent: true
+        }));
+        rayLine.name = "LineTrail";
+        rayLine.interactive = false;
+        rayLine.interactiveChildren = false;
+    quanta3D.add(rayLine);
+
+    
+    
+
     quanta.add(quanta3D);
+    
+    //trails.push(lineGeom);
+
+    
+
     quanta.cursor = 'pointer';
     //planet.name = 'Planet ' + planetNames[Math.round(Math.random() * 7)];
     //planet.planetColor = planetColors[type];
@@ -90,14 +151,19 @@ function addQuanta() {
     quanta.speed = Math.random() * (0.4 - 0.01) + 0.01;
     quantas.push(quanta);
     scene.add(quanta);
+    
     quanta.on('click', function(ev) {
 
-        quanta.add(camera);
-        controls.reset();
-        controls.update();
-        camera.position.set(0.15, 0.15, 0);
-        followedQuanta = quanta;
-        console.log('Click over quanta');
+        if(ev.intersects && ev.intersects.length == 1 && ev.intersects[0].object.name=="LineTrail"){
+
+        }else{
+            quanta.add(camera);
+            controls.reset();
+            controls.update();
+            camera.position.set(0.15, 0.5, 0);
+            followedQuanta = quanta;
+            console.log('Click over quanta');
+        }
     });
     setRandomQuantaDestination(quanta)
 }

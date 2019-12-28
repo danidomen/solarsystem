@@ -6,11 +6,30 @@
 </head>
 
 <body>
+    <script type="x-shader/x-vertex" id="vertexShader">
+        attribute vec4 position;
+        attribute float u;
+        varying float v_u;
+        void main() {
+            gl_Position = position;
+            v_u = u;
+        }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentShader">
+        precision mediump float;
+        varying float v_u;
+        uniform float time;
+        void main() {
+            float green = fract(v_u + time);
+            gl_FragColor = vec4(0, green, 0, 1);
+        }
+    </script>
     <div class="planet-info-card">
     </div>
     <footer>
         <span id="quantaPopulation">0</span> QUANTAS
-        <input type="button" id="addQuanta" value="Add Quanta" /> <input type="text" id="quantaNumber" placeholder="Quanta number" />
+        <input type="button" id="addQuanta" value="Add Quanta" /> <input type="text" id="quantaNumber"
+            placeholder="Quanta number" />
         <input type="button" id="eraseQuanta" value="Erase Quanta" />
         <!--<p>Click izquierdo / Tocar para <span>Orbitar</span></p>
         <p>Click central / Scroll / Pellizcar para hacer <span>Zoom</span></p>

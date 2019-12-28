@@ -5,6 +5,8 @@ var ctx = document.body.appendChild(document.createElement('canvas')).getContext
         alpha: true
     });
 
+    
+
 document.body.appendChild(renderer.domElement);
 renderer.domElement.style.position =
     ctx.canvas.style.position = 'fixed';
@@ -24,13 +26,15 @@ camera.position.set(700, 235, 0);
 
 var interaction = new THREE.Interaction(renderer, scene, camera);
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableKeys = true;
 controls.enableDamping = true;
 controls.dampingFactor = 1;
+controls.zoomSpeed = 5;
 
 //Objects
 createStar();
 
-addPlanets(5);
+addPlanets(5,0);
 
 //2D
 createBgStars();
@@ -56,6 +60,7 @@ function animate() {
     if (followedQuanta) {
         camera.lookAt(followedQuanta.position);
     }
+
     renderer.render(scene, camera);
     stats.end();
     requestAnimationFrame(animate);
