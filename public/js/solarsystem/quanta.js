@@ -1,11 +1,13 @@
 var quantas = [];
+var pirates = [];
+var security = [];
 var followedQuanta = null;
 
 
 
 
-function quantaTravel() {
-    quantas.forEach(quanta => {
+function quantaTravel(quantaType="quantas") {
+    window[quantaType].forEach(quanta => {
 
         if (quanta.travelTarget) {
             var targetPos = quanta.travelTarget.position
@@ -19,7 +21,7 @@ function quantaTravel() {
                 //quanta.travelTarget = null;
                 setRandomQuantaDestination(quanta);
             } else {
-                quanta.position.set(quanta.position.x + velX, 0, quanta.position.z + velZ)
+                quanta.position.set(quanta.position.x + velX, quanta.position.y, quanta.position.z + velZ)
                     //quanta.position.set(THREE.Math.lerp(quanta.position.x,targetPos.x,aceleration), 0,THREE.Math.lerp(quanta.position.z,targetPos.z,aceleration))
                 quanta.children[0].lookAt(targetPos.x, -999999, targetPos.z);
                 //quanta.lookAt(targetPos.x,-999999,targetPos.z)
@@ -28,10 +30,7 @@ function quantaTravel() {
     });
 }
 
-var trails = [];
-var materialQuanta = new THREE.MeshLambertMaterial({
-    color: 0x00ff00,
-});
+
 
 var lineVertexShader = `
   	varying vec3 vPos;
@@ -57,9 +56,30 @@ var lineFragmentShader = `
 
   `;
 
-function addQuanta() {
+function addQuanta(quantaType="quantas") {
     var quanta = new THREE.Group();
     var quanta3D = new THREE.LOD();
+
+
+    var colorMaterial = null;
+    switch(quantaType){
+        case "quantas": 
+        colorMaterial = 0x00ff00;
+        break;
+        case "pirates": 
+        colorMaterial = 0xff0000;
+        break;
+        case "security": 
+        colorMaterial = 0x00BFFF;
+        break;
+    }
+    var materialQuanta = new THREE.MeshLambertMaterial({
+        color: colorMaterial,
+        emissive: colorMaterial,
+        emissiveIntensity: 0.6,
+        side: THREE.DoubleSide
+    });
+    
 
     for (var i = 0; i < 5; i++) {
         var radius = 4;
@@ -101,11 +121,18 @@ function addQuanta() {
 
         var geometry = new THREE.CylinderGeometry(0, radius, height, faces, 1)
 
+        
         var mesh = new THREE.Mesh(geometry, materialQuanta);
 
         if (i == 0) {
 
             mesh = shipMeshes[Math.floor(Math.random() * shipMeshes.length)].clone();
+            mesh.traverse(function(child) {
+                if (child instanceof THREE.Mesh){
+                    child.material = materialQuanta;
+                }
+                });
+            mesh.material = materialQuanta;
             mesh.rotation.set(Math.PI / 2, 0, Math.PI)
         }
 
@@ -117,7 +144,7 @@ function addQuanta() {
     var rayLine = new THREE.Line(lineGeom, new THREE.ShaderMaterial({
         uniforms: {
             color: {
-                value: new THREE.Color(0x00ff00)
+                value: new THREE.Color(colorMaterial)
             },
             origin: {
                 value: new THREE.Vector3()
@@ -148,10 +175,13 @@ function addQuanta() {
     //planet.name = 'Planet ' + planetNames[Math.round(Math.random() * 7)];
     //planet.planetColor = planetColors[type];
     //scene.add(planet);
+    var possibleY = Math.random() * (1 - 0.1) + 0.1;
+    possibleY *= Math.floor(Math.random()*2) == 1 ? 1 : -1;
+    var possibleZ = possibleY
 
-    quanta.position.set(1000, 0, 0);
+    quanta.position.set(1000, possibleY, possibleZ);
     quanta.speed = Math.random() * (0.4 - 0.01) + 0.01;
-    quantas.push(quanta);
+    window[quantaType].push(quanta);
     scene.add(quanta);
 
     quanta.on('click', function(ev) {
@@ -174,27 +204,36 @@ function setRandomQuantaDestination(quanta) {
     quanta.travelTarget = planets[Math.floor(Math.random() * planets.length)]
 }
 
-function setQuantaDestination(target) {
+/*function setQuantaDestination(target) {
     quantas.forEach(quanta => {
         quanta.travelTarget = target
     });
-}
+}*/
 
-function addBatchQuantas(number) {
+function addBatchQuantas(number,quantaType="quantas") {
     for (i = 0; i < number; i++) {
-        addQuanta();
+        addQuanta(quantaType);
     }
-    $('#quantaPopulation').html(quantas.length);
+    $(`#${quantaType}Population`).html(window[quantaType].length);
 }
 
 
-function clearQuantas(number) {
+function clearQuantas(number,quantaType="quantas") {
     for (i = 0; i < number; i++) {
-        quanta = quantas[i];
+        quanta = window[quantaType][i];
         scene.remove(scene.getObjectByProperty('uuid', quanta.uuid));
     }
-    quantas.splice(0, number);
-    $('#quantaPopulation').html(quantas.length);
+    window[quantaType].splice(0, number);
+    $(`#${quantaType}Population`).html(window[quantaType].length);
+}
+
+function setQuanta(number,quantaType="quantas"){
+    let difference = Math.abs(number - window[quantaType].length) ;
+    if (number >= difference){
+        addBatchQuantas(difference,quantaType);
+    }else{
+        clearQuantas(difference,quantaType);
+    }
 }
 
 

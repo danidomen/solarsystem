@@ -1,5 +1,6 @@
 //Renderer Elements
-var ctx = document.body.appendChild(document.createElement('canvas')).getContext('2d'),
+var documentContainer = document.getElementById('galaxy-container');
+var ctx = documentContainer.appendChild(document.createElement('canvas')).getContext('2d'),
     renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true
@@ -7,7 +8,7 @@ var ctx = document.body.appendChild(document.createElement('canvas')).getContext
 
 
 
-document.body.appendChild(renderer.domElement);
+documentContainer.appendChild(renderer.domElement);
 renderer.domElement.style.position =
     ctx.canvas.style.position = 'fixed';
 ctx.canvas.style.background = 'black';
@@ -31,6 +32,34 @@ controls.enableDamping = true;
 controls.dampingFactor = 1;
 controls.zoomSpeed = 5;
 
+
+function resize() {
+    var ratio = 16 / 9,
+    preHeight = documentContainer.clientWidth / ratio;
+
+    
+    if (preHeight <= documentContainer.clientHeight) {
+        renderer.setSize(documentContainer.clientWidth, preHeight);
+        ctx.canvas.width = documentContainer.clientWidth;
+        ctx.canvas.height = preHeight;
+    } else {
+        var newWidth = Math.floor(documentContainer.clientWidth - (preHeight - documentContainer.clientHeight) * ratio);
+        newWidth -= newWidth % 2 !== 0 ? 1 : 0;
+        renderer.setSize(newWidth, newWidth / ratio);
+        ctx.canvas.width = newWidth;
+        ctx.canvas.height = newWidth / ratio;
+    }
+
+    renderer.domElement.style.width = '';
+    renderer.domElement.style.height = '';
+    renderer.domElement.style.left = ctx.canvas.style.left = (documentContainer.clientWidth - renderer.domElement.width) / 2 + 'px';
+    renderer.domElement.style.top = ctx.canvas.style.top = (documentContainer.clientHeight - renderer.domElement.height) / 2 + 'px';
+}
+
+window.addEventListener('resize', resize);
+
+resize();
+
 //Objects
 createStar();
 
@@ -44,7 +73,7 @@ stats.setMode(0);
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.left = '0px';
 stats.domElement.style.top = '0px';
-document.body.appendChild(stats.domElement);
+documentContainer.appendChild(stats.domElement);
 
 //Main Loop
 var t = 0;
@@ -53,7 +82,9 @@ function animate() {
     stats.begin();
     animateBgStars();
     planetsRotation();
-    quantaTravel()
+    quantaTravel('quantas');
+    quantaTravel('pirates');
+    quantaTravel('security');
     t += 0.01;
     starRotation(t);
     if (followedQuanta) {

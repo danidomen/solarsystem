@@ -1,42 +1,227 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="/css/style.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HEX System - Star Citizen Created by the Community.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="This is an example dashboard created using build-in elements and components.">
+    <meta name="msapplication-tap-highlight" content="no">
+    <!--
+    =========================================================
+    * ArchitectUI HTML Theme Dashboard - v1.0.0
+    =========================================================
+    * Product Page: https://dashboardpack.com
+    * Copyright 2019 DashboardPack (https://dashboardpack.com)
+    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
+    =========================================================
+    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    -->
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/rangeslider.css" rel="stylesheet">
+    <link href="/css/style_theme.css" rel="stylesheet">
 </head>
 
 <body>
-    <script type="x-shader/x-vertex" id="vertexShader">
-        attribute vec4 position;
-        attribute float u;
-        varying float v_u;
-        void main() {
-            gl_Position = position;
-            v_u = u;
-        }
-    </script>
-    <script type="x-shader/x-fragment" id="fragmentShader">
-        precision mediump float;
-        varying float v_u;
-        uniform float time;
-        void main() {
-            float green = fract(v_u + time);
-            gl_FragColor = vec4(0, green, 0, 1);
-        }
-    </script>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header fixed-footer">
+        <div class="app-header  header-shadow bg-vicious-stance header-text-light">
+            <div class="app-header__logo">
+                <div class="logo-src"></div>
+                <div class="header__pane ml-auto">
+                    <div>
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="app-header__mobile-menu">
+                <div>
+                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="app-header__menu">
+                <span>
+                    <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <span class="btn-icon-wrapper">
+                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                        </span>
+                </button>
+                </span>
+            </div>
+            <div class="app-header__content">
+                <div class="app-header-left">
+                    <div class="search-wrapper">
+                        <div class="input-holder">
+                            <input type="text" class="search-input" placeholder="Type to search">
+                            <button class="search-icon"><span></span></button>
+                        </div>
+                        <button class="close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-theme-settings">
+            <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning">
+                <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
+            </button>
+            <div class="theme-settings__inner bg-royal">
+                <div class="scrollbar-container">
+                        <div class="m-4 card simulator-settings">
+                                <div class="card-header bg-dark">
+                                    <ul class="nav nav-justified">
+                                        <li class="nav-item"><a data-toggle="tab" href="#tab-eg7-0" class="active nav-link">RULES</a></li>
+                                        <li class="nav-item"><a data-toggle="tab" href="#tab-eg7-1" class="nav-link">WORLD</a></li>
+                                    </ul>
+                                </div>
+                                <div class="card-body bg-bluegrey bg-blueprint">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab-eg7-0" role="tabpanel"><p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                                            software like Aldus PageMaker
+                                            including versions of Lorem Ipsum.</p></div>
+                                        <div class="tab-pane" id="tab-eg7-1" role="tabpanel" id="sortable">
+                                            <div class="col-md-4 p-1">
+                                                    <div class="card-building mb-3 card bg-vicious-stance">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Area 18</h5>
+                                                            <h6 class="mb-0 card-subtitle">Spaceport</h6>
+                                                        </div>
+                                                        <img width="100%" src="https://robertsspaceindustries.com/media/19q7wk65bbbcbr/product_thumb_large/Area-18.png" alt="Card image cap">
+                                                        <div class="card-body">Some quick example text
+                                                            
+                                                            
+                                                        </div>
+                                                        <div class="card-footer bg-transparent">
+                                                                <i class="fa fa-compass"></i>
+                                                                <i class="fa fa-fw" aria-hidden="true"></i>
+                                                                <i class="fa fa-fw" aria-hidden="true"></i>
+                                                                <i class="fa fa-angle-down" ></i>     
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-4 p-1">
+                                                
+                                            </div>
+                                            <div class="col-md-4 p-1">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+        <div class="app-main bg-black">
+            <div class="app-sidebar sidebar-shadow bg-vicious-stance sidebar-text-light">
+                <div class="app-header__logo">
+                    <div class="logo-src"></div>
+                    <div class="header__pane ml-auto">
+                        <div>
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                                    <span class="hamburger-box">
+                                        <span class="hamburger-inner"></span>
+                                    </span>
+                                </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-header__mobile-menu">
+                    <div>
+                        <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                    </div>
+                </div>
+                <div class="app-header__menu">
+                    <span>
+                            <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                                <span class="btn-icon-wrapper">
+                                    <i class="fa fa-ellipsis-v fa-w-6"></i>
+                                </span>
+                    </button>
+                    </span>
+                </div>
+                <div class="scrollbar-sidebar">
+                    <div class="app-sidebar__inner">
+                        <ul class="vertical-nav-menu">
+                            <li class="app-sidebar__heading">Tools</li>
+                            <li>
+                                <a href="#" class="mm-active">
+                                    <i class="metismenu-icon pe-7s-global"></i> Simulation
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="app-main__outer">
+                <div class="app-main__inner bg-black">
+                    <div class="app-page-title text-light">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-info icon-gradient bg-happy-itmeo">
+                                        </i>
+                                </div>
+                                <div>Simulation Workbench
+                                    <div class="page-title-subheading">WIP
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="galaxy-container"></div>
+
+                </div>
+                <div class="app-wrapper-footer">
+                    <div class="app-footer">
+                        <div class="app-footer__inner bg-transparent">
+                            <div class="bg-footer-layer-1 ml-auto mr-auto">
+                                <div class="bg-footer-layer-2">
+                                    <div class="bg-footer-layer-3 text-light">
+                                            <div class="row">
+                                                <div class="col-md-3 text-right">Quanta</div>
+                                                <div class="col-md-6"><input id="rangeQuanta" type="range" max="2000" value="0" data-rangeslider=""></div>
+                                                <div class="col-md-3"><span id="quantasPopulation">0</span></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 text-right">Pirates</div>
+                                                <div class="col-md-6"><input id="rangePirates" type="range" max="200" value="0" data-rangeslider=""></div>
+                                                <div class="col-md-3"><span id="piratesPopulation">0</span></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 text-right">Security</div>
+                                                <div class="col-md-6"><input id="rangeSecurity" type="range" max="200" value="0" data-rangeslider=""></div>
+                                                <div class="col-md-3"><span id="securityPopulation">0</span></div>
+                                            </div>
+                                    </div>                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="planet-info-card">
     </div>
-    <footer>
-        <span id="quantaPopulation">0</span> QUANTAS
-        <input type="button" id="addQuanta" value="Add Quanta" /> <input type="text" id="quantaNumber"
-            placeholder="Quanta number" />
-        <input type="button" id="eraseQuanta" value="Erase Quanta" />
-        <!--<p>Click izquierdo / Tocar para <span>Orbitar</span></p>
-        <p>Click central / Scroll / Pellizcar para hacer <span>Zoom</span></p>
-        <p>Click derecho / Arrastrar con 3 dedos para <span>Panear</span></p>
-        <p>Refrescando obtienes un sistema solar aleatorio</p>-->
-    </footer>
+    <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/rangeslider.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
     <script type="text/javascript" src="/js/three.interaction.js"></script>
     <script type="text/javascript" src="/js/THREEOrbit.js"></script>
@@ -48,6 +233,43 @@
     <script type="text/javascript" src="/js/solarsystem/quanta.js"></script>
     <script type="text/javascript" src="/js/generator.js"></script>
     <script type="text/javascript" src="/js/document.js"></script>
+    <script>
+        $( document ).ready(function() {
+$("#sortable").sortable();
+//$("#sortable").disableSelection();
+});
+
+        $('#rangeQuanta').rangeslider({
+            polyfill: false,
+            horizontalClass: 'rangeslider--horizontal rangeslider_horizontal_quanta',
+            fillClass: 'rangeslider__fill rangeslider_custom_fill',
+            handleClass: 'rangeslider__handle rangeslider_handle_transparent',
+            onSlideEnd: function(position, value) {
+                setQuanta(value,'quantas');
+            }
+        });
+
+        $('#rangePirates').rangeslider({
+            polyfill: false,
+            horizontalClass: 'rangeslider--horizontal rangeslider_horizontal_pirates',
+            fillClass: 'rangeslider__fill rangeslider_custom_fill_pirates',
+            handleClass: 'rangeslider__handle rangeslider_handle_transparent',
+            onSlideEnd: function(position, value) {
+                setQuanta(value,'pirates');
+            }
+        });
+
+        $('#rangeSecurity').rangeslider({
+            polyfill: false,
+            horizontalClass: 'rangeslider--horizontal rangeslider_horizontal_security',
+            fillClass: 'rangeslider__fill rangeslider_custom_fill_security',
+            handleClass: 'rangeslider__handle rangeslider_handle_transparent',
+            onSlideEnd: function(position, value) {
+                setQuanta(value,'security');
+            }
+        });
+        
+    </script>
 </body>
 
 </html>
