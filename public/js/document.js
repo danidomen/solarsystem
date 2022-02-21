@@ -1,5 +1,6 @@
 $(document).ready(function () {
     planetCard.hide();
+    getTrackCoordinates();
 })
 function resize() {
     var ratio = 16 / 9,
@@ -23,7 +24,26 @@ function resize() {
     renderer.domElement.style.left = ctx.canvas.style.left = (documentContainer.clientWidth - renderer.domElement.width) / 2 + 'px';
     renderer.domElement.style.top = ctx.canvas.style.top = (documentContainer.clientHeight - renderer.domElement.height) / 2 + 'px';
 }
-
 window.addEventListener('resize', resize);
+
+//RESET CAMERA AND RESET FOLLOW ITEM
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    var isEscape = false;
+    if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc");
+    } else {
+        isEscape = (evt.keyCode === 27);
+    }
+    if (isEscape) {
+        if(camera.parent?.scale){
+            camera.parent.scale.set(1,1,1);
+        }
+        cameraFollowTo = null;
+        scene.add(camera);
+        controls.reset();
+        camera.position.set(cameraInitPos.x, cameraInitPos.y, cameraInitPos.z);
+    }
+};
 
 resize();

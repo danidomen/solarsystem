@@ -1,10 +1,12 @@
 var glows = [];
 var star = null;
 var bgStars = [];
+var cameraFollowTo = null;
 
 function createStar() {
     var starColor = (function() {
-            var colors = [0xFFFF00, 0x559999, 0xFF6339, 0xFFFFFF];
+            //var colors = [0xFFFF00, 0x559999, 0xFF6339, 0xFFFFFF];
+            colors = [0xFFFF00];
             return colors[Math.floor(Math.random() * colors.length)];
         })(),
         size = 10 + Math.random() * 7;
@@ -49,7 +51,7 @@ function createStar() {
     light1.position.set(0, 0, 0);
     scene.add(light1);
 
-    var light2 = new THREE.AmbientLight(0x990909, 0.5);
+    var light2 = new THREE.AmbientLight(0xFFFFFF, 0.8);
     scene.add(light2);
 }
 

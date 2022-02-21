@@ -1,7 +1,7 @@
 var quantas = [];
 var pirates = [];
 var security = [];
-var followedQuanta = null;
+
 
 
 
@@ -193,7 +193,7 @@ function addQuanta(quantaType="quantas") {
             controls.reset();
             controls.update();
             camera.position.set(0.15, 0.5, 0);
-            followedQuanta = quanta;
+            cameraFollowTo = quanta;
             console.log('Click over quanta');
         }
     });
@@ -237,18 +237,3 @@ function setQuanta(number,quantaType="quantas"){
 }
 
 
-document.onkeydown = function(evt) {
-    evt = evt || window.event;
-    var isEscape = false;
-    if ("key" in evt) {
-        isEscape = (evt.key === "Escape" || evt.key === "Esc");
-    } else {
-        isEscape = (evt.keyCode === 27);
-    }
-    if (isEscape) {
-        followedQuanta = null;
-        scene.add(camera);
-        controls.reset();
-        camera.position.set(700, 235, 0);
-    }
-};
