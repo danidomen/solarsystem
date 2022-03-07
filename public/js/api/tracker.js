@@ -32,26 +32,37 @@ function getTrackCoordinates(){
                 points.push( new THREE.Vector3(location.lon * reductorCoordinates, location.alt * reductorCoordinates, location.lat * reductorCoordinates));
 
                 var iconSprite = new THREE.Sprite( iconMaterial );
+                iconSprite.name = 'locator';
                 iconSprite.position.set(location.lon * reductorCoordinates, location.alt * reductorCoordinates, location.lat * reductorCoordinates);
-                iconSprite.scale.set(10,10,10);
+                iconSprite.scale.set(5,5,5);
                 iconSprite.cursor = 'pointer';
                 iconSprite.isLocator = true;
                 locatorPoints.push(iconSprite);
                 scene.add( iconSprite );
 
-                iconSprite.on('mouseover',function(ev){
-                    console.log('juasjuas');
+                iconSprite.addEventListener('mouseover',function(ev){
+                    if(!insidePlanet){
+                        document.body.style.cursor = 'crosshair';
+                    }
+                    
+                });
+                
+
+                iconSprite.addEventListener('dblclick', function(ev) {
+                    if(!insidePlanet){
+                        controls.target = this.position
+                        camera.position = this.position
+                        camera.lookAt(this.position);
+                        controls.update();
+                        cameraFollowTo = this;
+                        resizePOV();
+                    }
                 });
 
-                /*iconSprite.on('click', function(ev) {
-                    this.add(camera);
-                    controls.reset();
-                    controls.update();
-                    camera.position.set(this.position.x, 30,0);
-                    camera.lookAt(this.position);
-                    cameraFollowTo = this;
-                    console.log(this.position)
-                })*/
+                iconSprite.addEventListener('mouseout', function(ev) {
+                    document.body.style.cursor = 'default';
+                });
+                interactionManager.add(iconSprite);
             });
             
         },

@@ -184,7 +184,7 @@ function addQuanta(quantaType="quantas") {
     window[quantaType].push(quanta);
     scene.add(quanta);
 
-    quanta.on('click', function(ev) {
+    quanta.addEventListener('click', function(ev) {
 
         if (ev.intersects && ev.intersects.length == 1 && ev.intersects[0].object.name == "LineTrail") {
 
@@ -197,6 +197,7 @@ function addQuanta(quantaType="quantas") {
             console.log('Click over quanta');
         }
     });
+    interactionManager.add(quanta);
     setRandomQuantaDestination(quanta)
 }
 

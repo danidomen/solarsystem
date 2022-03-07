@@ -2,6 +2,7 @@ body {
     background: black;
     user-select: none;
     font: 10pt monospace;
+    overflow: hidden;
 }
 
 canvas {

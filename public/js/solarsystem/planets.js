@@ -1,4 +1,5 @@
 var planetCard = $('.planet-info-card');
+var insidePlanet = false;
 
 var planetColors = [
         0x333333, //grey
@@ -137,30 +138,35 @@ function addPlanets() {
         planet.planetColor = STANTON_PLANET.color;
         planet.planetSize = STANTON_PLANET.size;
         scene.add(planet);
-        planet.on('mousemove', function(ev) {
-            setPlanetInfo(this)
+
+        planet.addEventListener('mousemove',function(ev){
+            setPlanetInfoPosition();
+        })
+        planet.addEventListener('mouseover', function(ev) {
+            document.body.style.cursor = 'pointer';
+            insidePlanet = this;
+            setPlanetInfo(this);
                 //console.log('%c' + planet.name + '%c => mouseover', 'color: #fff; background: #41b882; padding: 3px 4px;', 'color: #41b882; background: #fff;');
         });
 
-        planet.on('click', function(ev) {
-            this.add(camera);
-            controls.reset();
-            controls.update();
-            camera.position.set(this.position.x, 30,0);
+        planet.addEventListener('dblclick', function(ev) {
+            controls.target = this.position
+            camera.position = this.position
             camera.lookAt(this.position);
+            controls.update();
             cameraFollowTo = this;
-            console.log(this.position)
+            resizePOV();
         })
 
-        
-
-        planet.on('mouseout', function(ev) {
+        planet.addEventListener('mouseout', function(ev) {
+            insidePlanet = false;
             planetCard.hide();
+            document.body.style.cursor = 'default';
         });
-
+        interactionManager.add(planet);
 
         var orbit = new THREE.LineLoop(
-            new THREE.CircleGeometry(planet.orbitRadius, 90),
+            new THREE.CircleGeometry(planet.orbitRadius, 360),
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
                 transparent: true,
@@ -274,10 +280,13 @@ function planetsRotation() {
 }
 
 function setPlanetInfo(planet) {
-    if (window.event /*&& window.event.hasOwnProperty('clientY')*/ ) {
+    if (insidePlanet /*&& window.event.hasOwnProperty('clientY')*/ ) {
         planetCard.html(`<p>${planet.name}</p><div id="planet-type"></div>`);
         planetCard.find('#planet-type').css({ 'background': `radial-gradient(circle at 100px 100px, #${planet.planetColor.toString(16)}, #000)` });
-        planetCard.css({ top: window.event.clientY + 30, left: window.event.clientX + 30 });
-        planetCard.show();
+        planetCard.show();  
     }
+}
+
+function setPlanetInfoPosition(){
+    planetCard.css({ top: window.event.clientY + 30, left: window.event.clientX + 30 });
 }
