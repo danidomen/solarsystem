@@ -200,20 +200,24 @@
     margin-left: auto;
 }
 
-.rule-card{
+.route-card{
     background: #4b5263;
     -webkit-box-shadow: 11px 11px 6px -8px rgba(0,0,0,0.75);
     -moz-box-shadow: 11px 11px 6px -8px rgba(0,0,0,0.75);
     box-shadow: 11px 11px 6px -8px rgba(0,0,0,0.75);
 }
 
-.rule-card .title{
+.route-card .card-body{
+    padding: 0.5rem 1.25rem;
+}
+
+.route-card .title{
     cursor: pointer;
     font-size: 18px;
     color: #83c5ff;
 }
 
-.rule-card .rule-card-content {
+.route-card .route-card-content {
     margin-top: 20px;
 }
 

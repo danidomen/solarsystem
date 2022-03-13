@@ -38,6 +38,64 @@ var STANTON_PLANETS = [
         'scaleZoom': 6,
         'orbital_speed': 0,
         'atmo': 1,
+        'moons': [
+            {
+                'name': 'Yela',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': -190.22916,
+                    'y': 0,
+                    'z': -26.13996
+                }
+            },
+            {
+                'name': 'Daymar',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': -189.30539,
+                    'y': 0,
+                    'z': -26.10158
+                }
+            },
+            {
+                'name': 'Cellin',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': -189.87611,
+                    'y': 0,
+                    'z': -27.09009
+                }
+            }
+        ],
+        'stations': [
+            {
+                'name': 'CRU-L1',
+                'color':'',
+                'position': {
+                    'x': -170.65959,
+                    'y': 0,
+                    'z': -23.98467
+                },
+            },
+            {
+                'name': 'Cru-L4',
+                'color':'',
+                'position': {
+                    'x': -71.73162,
+                    'y': 0,
+                    'z': -177.54207
+                },
+            },
+            {
+                'name': 'CRU-L5',
+                'color':'',
+                'position': {
+                    'x': -117.88995,
+                    'y': 0,
+                    'z': 150.89246
+                },
+            },
+        ]
     },
     {
         'name': 'Hurston',
@@ -52,6 +110,91 @@ var STANTON_PLANETS = [
         'scaleZoom': 1,
         'orbital_speed': 0,
         'atmo': 1,
+        'moons': [
+            {
+                'name': 'Ita',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': 128.30195,
+                    'y': 0,
+                    'z': 1.14912
+                }
+            },
+            {
+                'name': 'Abderdeen',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': 129.05757,
+                    'y': 0,
+                    'z': 0.40955
+                }
+            },
+            {
+                'name': 'Arial',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': 128.92673,
+                    'y': 0,
+                    'z': -0.31476
+                }
+            },
+            {
+                'name': 'Magda',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': 127.92686,
+                    'y': 0,
+                    'z': -0.74464
+                }
+            }
+        ],
+        'stations': [
+            {
+                'name': 'HUR-L1',
+                'color':'',
+                'position': {
+                    'x': 115.65410,
+                    'y': 0,
+                    'z': 0
+                },
+            },
+            {
+                'name': 'HUR-L2',
+                'color':'',
+                'position': {
+                    'x': 141.35497,
+                    'y': 0,
+                    'z': 0
+                },
+            },
+            {
+                'name': 'HUR-L3',
+                'color':'',
+                'position': {
+                    'x': -128.50451,
+                    'y': 0,
+                    'z': 0
+                },
+            },
+            {
+                'name': 'HUR-L4',
+                'color':'',
+                'position': {
+                    'x': 64.25226,
+                    'y': 0,
+                    'z': 111.28825
+                },
+            },
+            {
+                'name': 'HUR-L5',
+                'color':'',
+                'position': {
+                    'x': 64.25238,
+                    'y': 0,
+                    'z': -111.28832
+                },
+            }
+        ]
     },
     {
         'name': 'Arccorp',
@@ -66,6 +209,37 @@ var STANTON_PLANETS = [
         'scaleZoom': 1,
         'orbital_speed': 0,
         'atmo': 1,
+        'moons': [
+            {
+                'name': 'Lyria',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': 187.03607,
+                    'y': 0,
+                    'z': -221.21650
+                }
+            },
+            {
+                'name': 'Wala',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': 183.79649,
+                    'y': 0,
+                    'z': -220.00466
+                }
+            }
+        ],
+        'stations': [
+            {
+                'name': 'ARC-L1',
+                'color':'',
+                'position': {
+                    'x': 167.29134,
+                    'y': 0,
+                    'z': -199.37008
+                },
+            },
+        ]
     },
     {
         'name': 'Microtech',
@@ -80,6 +254,46 @@ var STANTON_PLANETS = [
         'scaleZoom': 1,
         'orbital_speed': 0,
         'atmo': 1,
+        'moons': [
+            {
+                'name': 'Calliope',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': 223.98370,
+                    'y': 0,
+                    'z': 371.68839
+                }
+            },
+            {
+                'name': 'Clio',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': 224.76728,
+                    'y': 0,
+                    'z': 370.91018
+                }
+            },
+            {
+                'name': 'Euturpe',
+                'color': 0xFFFFFF,
+                'position': {
+                    'x': 224.88110,
+                    'y': 0,
+                    'z': 370.81124
+                }
+            }
+        ],
+        'stations': [
+            {
+                'name': 'MIC-L1',
+                'color':'',
+                'position': {
+                    'x': 202.15827,
+                    'y': 0,
+                    'z': 334.67069
+                },
+            },
+        ]
     },
 ]
 
@@ -87,9 +301,9 @@ function addPlanets() {
     for (var p = 0; p < STANTON_PLANETS.length; p++) {
         var STANTON_PLANET = STANTON_PLANETS[p];
         STANTON_PLANET.position = {
-            x: STANTON_PLANET.position.x * 0.5,
-            y: STANTON_PLANET.position.y * 0.5,
-            z: STANTON_PLANET.position.z * 0.5,
+            x: STANTON_PLANET.position.x * reductorCoordinates,
+            y: STANTON_PLANET.position.y * reductorCoordinates,
+            z: STANTON_PLANET.position.z * reductorCoordinates,
         }
         var planetGeom = new THREE.Mesh(
                 new THREE.SphereGeometry(STANTON_PLANET.size, 20, 20),
@@ -139,6 +353,10 @@ function addPlanets() {
         planet.planetSize = STANTON_PLANET.size;
         scene.add(planet);
 
+        var textSprite = makeTextSprite(planet.name, { fontsize: 44, textColor: {r:255, g:255, b:255, a:1.0}} );
+        textSprite.position.set(2,5,0);
+	    planet.add( textSprite );
+
         planet.addEventListener('mousemove',function(ev){
             setPlanetInfoPosition();
         })
@@ -150,12 +368,7 @@ function addPlanets() {
         });
 
         planet.addEventListener('dblclick', function(ev) {
-            controls.target = this.position
-            camera.position = this.position
-            camera.lookAt(this.position);
-            controls.update();
-            cameraFollowTo = this;
-            resizePOV();
+            centerToObjectAndZoom(this)
         })
 
         planet.addEventListener('mouseout', function(ev) {
@@ -177,6 +390,60 @@ function addPlanets() {
         orbit.geometry.vertices.shift();
         orbit.rotation.x = THREE.Math.degToRad(90);
         scene.add(orbit);
+
+        STANTON_PLANET.moons.forEach(moon => {
+            moon.position = {
+                x: moon.position.x * 0.5,
+                y: moon.position.y * 0.5,
+                z: (moon.position.z * 0.5) * -1,
+            }
+            var moonGeom = new THREE.Mesh(
+                new THREE.SphereGeometry(1, 20, 20),
+                new THREE.MeshLambertMaterial({
+                    color: moon.color,
+                    //shading: THREE.FlatShading
+                })
+            ),
+            moon3D = new THREE.Object3D();
+
+            moon3D.add(moonGeom);
+            moon3D.name = moon.name
+            moon3D.scale.set(0.0015 , 0.0015, 0.0015)
+            moon3D.position.set( moon.position.x, moon.position.y, moon.position.z)
+            scene.add(moon3D);
+            //moon3D.orbitRadius = Math.sqrt((Math.abs(planet.position.x - moon3D.position.x)*Math.abs(planet.position.x - moon3D.position.x)) + (Math.abs(planet.position.z - moon3D.position.z)*Math.abs(planet.position.z - moon3D.position.z)))
+            moon3D.orbitRadius = moon3D.position.distanceTo(planet.position)
+
+            var orbit = new THREE.LineLoop(
+                new THREE.CircleGeometry(moon3D.orbitRadius, 360),
+                new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                    transparent: true,
+                    opacity: .35,
+                    side: THREE.BackSide
+                })
+            );
+            orbit.geometry.vertices.shift();
+            orbit.rotation.x = THREE.Math.degToRad(90);
+            orbit.position.set(planet.position.x,planet.position.y,planet.position.z)
+            console.log(orbit.position)
+            scene.add(orbit);
+            var textSprite = makeTextSprite(moon.name, { fontsize: 60, textColor: {r:255, g:255, b:255, a:1.0}} );
+            textSprite.position.set(2,5,0);
+            moon3D.add( textSprite );
+
+            moon3D.addEventListener('dblclick', function(ev) {
+                centerToObjectAndZoom(this)
+            })
+            moon3D.addEventListener('mouseover', function(ev) {
+                document.body.style.cursor = 'pointer';
+            });
+
+            moon3D.addEventListener('mouseout', function(ev) {
+                document.body.style.cursor = 'default';
+            });
+            interactionManager.add(moon3D);
+        })
     }
 }
 

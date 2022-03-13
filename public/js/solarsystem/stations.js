@@ -6,16 +6,34 @@ var stationMaterial = new THREE.MeshLambertMaterial({
     shading: THREE.FlatShading
 })
 
-function addStation(stationName){
-    var station = meshesDAE[0].clone()//new THREE.Mesh(meshesDAE[0].clone, stationMaterial);
+function addStation(stationData){
+    var station = meshesDAE[0].clone()
     station.traverse(function(child) {
         if (child instanceof THREE.Mesh){
             child.material = stationMaterial;
         }
     });
-    station.scale.set(5,5,5);
-    station.position.set(101.079134723125,-0.00000476121003,-167.335362929625)
+    stationData.position = {
+        x: stationData.position.x * reductorCoordinates,
+        y: stationData.position.y * reductorCoordinates,
+        z: stationData.position.z * reductorCoordinates,
+    }
+    station.scale.set(1,1,1);
+    station.position.set(stationData.position.x, stationData.position.y, stationData.position.z * -1);
     station.material = stationMaterial;
+    station.name = stationData.name;
     scene.add(station);
     stations.push(station);
+    
+    var textSprite = makeTextSprite(station.name, { fontsize: 38, textColor: {r:222, g:227, b:95, a:1.0}} );
+    textSprite.position.set(2,1,0);
+	station.add( textSprite );
+}
+
+function addStations(){
+    STANTON_PLANETS.forEach(planet => {
+        planet.stations.forEach(station => {
+            addStation(station)
+        })
+    })
 }

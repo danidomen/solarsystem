@@ -4,6 +4,52 @@ var scaleValues = {
     multiplier: 0.0025025062,
     adjustment: 0.001002506265 
 }
+function resetCameraToCenter(){
+    cameraFollowTo = null;
+    controls.reset();
+    camera.position.set(cameraInitPos.x, cameraInitPos.y, cameraInitPos.z);
+    resizePOV();
+}
+
+function centerToObjectAndZoom(obj){
+    resetCameraToCenter();
+    controls.target = obj.position
+    camera.position = obj.position
+    camera.lookAt(obj.position);
+    controls.update();
+    cameraFollowTo = obj;
+    resizePOV();
+    controls.constraint.dollyIn(5000)
+}
+
+function makeTextSprite( message, parameters )
+{
+    if ( parameters === undefined ) parameters = {};
+    var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
+    var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
+    var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
+    var borderColor = parameters.hasOwnProperty("borderColor") ?parameters["borderColor"] : { r:0, g:0, b:0, a:1.0 };
+    var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?parameters["backgroundColor"] : { r:0, g:0, b:255, a:1.0 };
+    var textColor = parameters.hasOwnProperty("textColor") ?parameters["textColor"] : { r:0, g:0, b:0, a:1.0 };
+
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    context.font = "Bold " + fontsize + "px " + fontface;
+    var metrics = context.measureText( message );
+    var textWidth = metrics.width;
+
+    context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+    context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
+    context.fillStyle = "rgba("+textColor.r+", "+textColor.g+", "+textColor.b+", 1.0)";
+    context.fillText( message, borderThickness, fontsize + borderThickness);
+
+    var texture = new THREE.Texture(canvas) 
+    texture.needsUpdate = true;
+    var spriteMaterial = new THREE.SpriteMaterial( { map: texture, useScreenCoordinates: false } );
+    var sprite = new THREE.Sprite( spriteMaterial );
+    sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
+    return sprite;  
+}
 
 function rescaleFromCamera(obj, scaleZoom, minScale, maxScale = 1){
     camera.getWorldPosition(cameraWorldPos);
@@ -41,7 +87,7 @@ scene.background = new THREE.TextureLoader().load( '/images/space_background.png
 var camera = new THREE.PerspectiveCamera(
     20, // Field of view
     16 / 9, // Aspect ratio
-    0.001, // Near plane
+    0.1, // Near plane
     40000 // Far plane
 );
 
@@ -63,6 +109,11 @@ controls.addEventListener('change', resizePOV);
 function resizePOV(e) {
     var zoomValue = controls.target.distanceTo(controls.object.position);
     if(zoomValue != lastZoomValue){
+        if(zoomValue <= 200){
+            camera.near = 0.001
+        }else{
+            camera.near = 0.1;
+        }
         lastZoomValue = zoomValue;
         planets.map(function(p){
 
@@ -70,11 +121,11 @@ function resizePOV(e) {
             //p.scale.set(Math.min(planetScale * p.scaleZoom,3), Math.min(planetScale * p.scaleZoom,3), Math.min(planetScale * p.scaleZoom,3));
         });
         locatorPoints.map(function(l){
-            rescaleFromCamera(l,5,0.00008,5)
+            rescaleFromCamera(l,5,0.0001,5)
             //x.scale.set(locatorScale,locatorScale,locatorScale);
         })
         stations.map(function(s){
-            rescaleFromCamera(s,5,0.0008,10)
+            rescaleFromCamera(s,5,0.0005,1)
         })
     }
     //if(cameraFollowTo){
@@ -121,7 +172,7 @@ addPlanets(5, 0);
 
 //addStation('aa');
 //2D
-createBgStars();
+//createBgStars();
 
 //Stat tracking
 var stats = new Stats();

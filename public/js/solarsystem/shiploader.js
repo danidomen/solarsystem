@@ -42,7 +42,7 @@ function loadDAEModel(modelName){
             data.scene.scale.set(1, 1, 1)
             data.scene.updateMatrix();
             meshesDAE.push(data.scene)
-            addStation('aaa');
+            addStations();
         },
         // called when loading is in progresses
         function(xhr) {
